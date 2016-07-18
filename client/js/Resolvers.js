@@ -13,6 +13,9 @@ function GetResolver(domain) {
   } else if (domain == "vodlocker.com") {
     var resolver = new VodlockerResolver();
     return resolver;
+  } else if (domain = "thevideo.me") {
+    var resolver = new thevideomeResolver();
+    return resolver;
   } /*else if (domain == "vidto.me") {
     var resolver = new VidtoResolver();
     return resolver;
