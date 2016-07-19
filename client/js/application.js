@@ -12,6 +12,7 @@ App.onLaunch = function(options) {
     `${options.BASEURL}js/Resolvers/VidSpotResolver.js`,
     `${options.BASEURL}js/Resolvers/VidbullResolver.js`,
     `${options.BASEURL}js/Resolvers/VodlockerResolver.js`,
+    `${options.BASEURL}js/Resolvers/thevideoResolver.js`,
     // other sources
     `${options.BASEURL}js/Presenter.js`,
     `${options.BASEURL}js/PageParser.js`
@@ -63,7 +64,7 @@ var createCatalog = function(title,pagedata, showsdata) {
       </list>
     </catalogTemplate>
   </document>`;
-
+console.log(textbody);
   var doc = Presenter.makeDocument(textbody);
 
   // pass data to elements to read them on event
@@ -131,7 +132,7 @@ function GetLatestLockupSections(pagedata) {
     }
     // create a block
     var img_src = pagedata[i].img_src;
-    var title = pagedata[i].title;
+    var title = pagedata[i].title.replace("&", "&amp;");
     result += `<lockup `;
     if (videourl != "") {
       result += `videoURL="${videourl}"`;
@@ -152,7 +153,7 @@ function GetShowsLockupSections(showsdata) {
 
   for (var showname in showsdata) {
     result += `<listItemLockup>
-	    <title>${showname}</title>
+	    <title>${showname.replace("&", "&amp;")}</title>
 	    <decorationLabel>${showsdata[showname].length}</decorationLabel>
 	    <relatedContent>
 	      <grid>
@@ -198,7 +199,8 @@ function GetProviderListLockupSections(providerlist) {
   var result = "";
   for (var d = 0; d < providerlist.length; d++) {
     var vurl = providerlist[d].videourl;
-    var title = providerlist[d].domain;
+    var title = providerlist[d].domain.replace("&", "&amp;");
+
     if (vurl != "") {
       result += `<listItemLockup>`;
       result += `<title>${title}</title>`;
